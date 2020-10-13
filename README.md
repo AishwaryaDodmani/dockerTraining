@@ -16,7 +16,7 @@
 
 *Command to search a Docker image in the registry:*
 
- `docker search <name>`
+    `docker search <name>`
 
  ***name**: image repository name* 
 
@@ -29,46 +29,46 @@
 
 *Command to run a container based on the docker image*
 
- `docker run <options> <image-name>`
+     `docker run <options> <image-name>`
 
 ***Note**: by default it runs in the foreground, **-d** ie. daemon makes it run in background*
 
 *Example:*
 
-`docker run -d redis:3.2`
+    `docker run -d redis:3.2`
 
 *Command to list all the running containers, their images and the uptime and also a friendly name and id*
 
- `docker ps`
+     `docker ps`
  
 *Command that provides more details about a running container:*
 
- `docker inspect <friendly-name|container-id>`
+     `docker inspect <friendly-name|container-id>`
 
 *Command to display messages that the container writes to std error and std out*
 
- `docker logs <friendly-name|container-id>`
+     `docker logs <friendly-name|container-id>`
 
 *If a service needs to be accessible by a process not running in a container, then the port needs to be exposed via the Host.
 ie. ports are bound when containers are started using*
 
- `-p <host-port>:<container-port> option`
+     `-p <host-port>:<container-port> option`
  
 *Example:*
 
- `docker run -d --name redisHostPort -p 6379:6379 redis:latest`
+     `docker run -d --name redisHostPort -p 6379:6379 redis:latest`
  
 ***Note**: The container Port ad application port needs to be the same, whereas host port can be anything thats free*
 
 *Command to dynamically allocate a host port
 Example:*
 
- `docker run -d --name redisDynamic -p 6379 redis:latest`
+     `docker run -d --name redisDynamic -p 6379 redis:latest`
 
 *Command to know which host port has been assigned when its allocated dynamically 
 Example:*
 
-`docker port redisDynamic 6379`
+    `docker port redisDynamic 6379`
 
 
 ### **DOCKERFILE**
@@ -93,15 +93,15 @@ COPY . /usr/share/nginx/html  *copies the content of the current directory into 
 
 *Command to build the image from the dockerfile in the current dir*
 
- `docker build -t <image_name:version> <path of the Dockerfile>`
+     `docker build -t <image_name:version> <path of the Dockerfile>`
  
 Example: 
 
- `docker build -t webserver-image:v1`
+     `docker build -t webserver-image:v1`
 
 *Command to list the images on the host*
 
-`docker images`
+    `docker images`
 
 
 **Add-on:**
@@ -122,7 +122,7 @@ With the base image defined, we need to run various commands to configure our im
 There are many commands to help with this, the main commands two are COPY and RUN.
 `RUN <command>`
 
-**Note:** RUN cmd allows you to execute any command as you would at a command prompt, for example installing different application packages or running a build command. The results of the RUN are persisted to the image so it's important not to leave any unnecessary or temporary files on the disk as these will be included in the image.
+**Note**:RUN cmd allows you to execute any command as you would at a command prompt, for example installing different application packages or running a build command. The results of the RUN are persisted to the image so it's important not to leave any unnecessary or temporary files on the disk as these will be included in the image.
 
 `COPY <src> <dest>`
 Allows you to copy files from the directory containing the Dockerfile to the container's image. This is extremely useful for source code and assets that you want to be deployed inside your container.
@@ -131,12 +131,13 @@ You need to define which port application needs to be accessible on.
 Using the `EXPOSE <port>` command you tell Docker which ports should be open and can be bound to.
 We now need to define the command that launches the application.
 
-The CMD line in a Dockerfile defines the default command to run when a container is launched. 
+The CMD line in a Dockerfile defines the default command to run when a container is launched.
+
 Example:
 
 `cmd -a "arga value" -b argb-value`
 
-**Note:**An alternative approach to CMD is ENTRYPOINT.
+**Note**:An alternative approach to CMD is ENTRYPOINT.
 
 
 **Dockerfile and the commands for a nodejs app**
@@ -168,9 +169,13 @@ CMD [ "npm", "start" ]
         `docker run -d --name my-running-app -p 3000:3000 my-nodejs-app`
 
 **Testing Container**
+
 You can test the container is accessible using curl. If the application responds then you know that everything has correctly started.
-curl http://localhost:3000
+
+`curl http://localhost:3000`
 
 **Note:** Using -e option, you can set the name and value as -e NODE_ENV=production
-Example: docker run -d --name my-production-running-app -e NODE_ENV=production -p 3000:3000 my-nodejs-app
+
+Example: 
+    `docker run -d --name my-production-running-app -e NODE_ENV=production -p 3000:3000 my-nodejs-app`
 
