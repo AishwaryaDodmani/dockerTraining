@@ -1,6 +1,6 @@
 # dockerTraining
 
-#### **What is Docker?**
+### **What is Docker?**
 
 - **open platform** for developing, shipping, and running applications.
 - enables you to separate your applications from your infrastructure so you can deliver software quickly.
@@ -8,7 +8,8 @@
 - it allows you to run **containers** which are sandboxed process running an application and its dependencies on the host operating system. 
 - with Docker, all containers are started based on a Docker **Image**
 
-#### **What is a Docker Image?**
+
+### **What is a Docker Image?**
 
 - Images are the **blueprint** of docker containers
 - An image includes everything needed to run an application - the code or binary, runtimes, dependencies, and any other filesystem objects required.
@@ -21,7 +22,7 @@
  ***name**: image repository name* 
 
 
-#### **What is a Docker Container?**
+### **What is a Docker Container?**
 
 - Fundamentally, a container is nothing but a running process, with some added encapsulation features applied to it in order to keep it isolated from the host and from other containers
 - with Docker, all containers are started based on a Docker **Image**
@@ -97,7 +98,7 @@ COPY . /usr/share/nginx/html  *copies the content of the current directory into 
  
 Example: 
 
-     `docker build -t webserver-image:v1`
+     `docker build -t webserver-image:v1 .`
 
 *Command to list the images on the host*
 
