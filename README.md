@@ -14,11 +14,11 @@
 - An image includes everything needed to run an application - the code or binary, runtimes, dependencies, and any other filesystem objects required.
 - We can find existing images at **Docker Image Registry** ie. registry.hub.docker.com/ 
 
-Command to search a Docker image in the registry:
+*Command to search a Docker image in the registry:*
 
  `docker search <name>`
 
- name: image repository name
+ *name: image repository name* 
 
 
 #### **What is a Docker Container?**
@@ -31,8 +31,8 @@ Command to search a Docker image in the registry:
 
  `docker run <options> <image-name>`
 
-* **Note**: by default it runs in the foreground, **-d** ie. daemon makes it run in background
-Example: *
+***Note**: by default it runs in the foreground, **-d** ie. daemon makes it run in background*
+*Example:*
 
 `docker run -d redis:3.2`
 
@@ -49,7 +49,7 @@ Example: *
  `docker logs <friendly-name|container-id>`
 
 *If a service needs to be accessible by a process not running in a container, then the port needs to be exposed via the Host.
-ie. ports are bound when containers are started using *
+ie. ports are bound when containers are started using*
 
  `-p <host-port>:<container-port> option`
  
@@ -57,9 +57,9 @@ ie. ports are bound when containers are started using *
 
  `docker run -d --name redisHostPort -p 6379:6379 redis:latest`
  
-* **Note**: The container Port ad application port needs to be the same, whereas host port can be anything thats free
+***Note**: The container Port ad application port needs to be the same, whereas host port can be anything thats free*
 
-Command to dynamically allocate a host port
+*Command to dynamically allocate a host port
 Example:*
 
  `docker run -d --name redisDynamic -p 6379 redis:latest`
