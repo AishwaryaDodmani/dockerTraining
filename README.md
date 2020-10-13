@@ -1,64 +1,62 @@
 # dockerTraining
 
-**What is Docker?**
+#### **What is Docker?**
 
-Docker is an open platform for developers and sysadmins to build, ship, and run distributed applications
-Docker enables you to separate your applications from your infrastructure so you can deliver software quickly.
+- **open platform** for developing, shipping, and running applications.
+- enables you to separate your applications from your infrastructure so you can deliver software quickly.
+- reduce the delay between writing code and running it in production by making shipping, testing, and deploying code quicker.
+- it allows you to run **containers** which are sandboxed process running an application and its dependencies on the host operating system. 
+- with Docker, all containers are started based on a Docker **Image**
 
-Docker allows you to run containers. 
+#### **What is a Docker Image?**
 
-A container is a sandboxed process running an application and its dependencies on the host operating system. 
+- Images are the **blueprint** of docker containers
+- An image includes everything needed to run an application - the code or binary, runtimes, dependencies, and any other filesystem objects required.
+- We can find existing images at **Docker Image Registry** ie. registry.hub.docker.com/ 
 
-The application inside the container considers itself to be the only process running on the machine while the machine can run multiple containers independently.
+Command to search a Docker image in the registry:
+ `docker search <name>`
 
-With Docker, all containers are started based on a Docker Image
+ <name>: image repository name
 
-Docker Image in brief?
+#### **What is a Docker Container?**
 
-Images are the blueprint of docker containers
-
-These images contain everything required to launch the process; the host doesn't require any configuration or dependencies.
-
-We can find existing images at registry.hub.docker.com/ 
-or 
-by using the command
-docker search <name>
- note: <name> here is the image repository name
+- Fundamentally, a container is nothing but a running process, with some added encapsulation features applied to it in order to keep it isolated from the host and from other containers
+- with Docker, all containers are started based on a Docker **Image**
 
 Command to run a container based on the docker image
+ `docker run <options> <image-name>`
 
-docker run <options> <image-name>
-
-Note: by default it runs in the foreground, “-d” makes it run in background
-Eg: 
-docker run -d redis:3.2
-
-note: d here is a deamon
+Note: by default it runs in the foreground, **-d** ie. daemon makes it run in background
+Example: 
+`docker run -d redis:3.2`
 
 Command to list all the running containers, their images and the uptime and also a friendly name and id
+ `docker ps`
+ 
+Command that provides more details about a running container:
 
- docker ps 
-The command that provides more details about a running container:
+ `docker inspect <friendly-name|container-id>`
 
-docker inspect <friendly-name|container-id> 
-
-The command to display messages that the container writes to std error and std out
-
-docker logs <friendly-name|container-id> 
+Command to display messages that the container writes to std error and std out
+ `docker logs <friendly-name|container-id>`
 
 If a service needs to be accessible by a process not running in a container, then the port needs to be exposed via the Host.
-
 ie. ports are bound when containers are started using 
--p <host-port>:<container-port> option
+ `-p <host-port>:<container-port> option`
  
-example:
- docker run -d --name redisHostPort -p 6379:6379 redis:latest
+Example:
+ `docker run -d --name redisHostPort -p 6379:6379 redis:latest`
+ 
+Note: The container Port ad application port needs to be the same, whereas host port can be anything thats free
 
-dynamically allocate a host port
-eg: docker run -d --name redisDynamic -p 6379 redis:latest
+Command to dynamically allocate a host port
+Example:
+ `docker run -d --name redisDynamic -p 6379 redis:latest`
 
-To know which port has been assigned. 
-docker port redisDynamic 6379
+Command to know which host port has been assigned when its allocated dynamically 
+Example:
+`docker port redisDynamic 6379`
 
 
 DOCKERFILE
