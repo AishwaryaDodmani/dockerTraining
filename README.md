@@ -15,9 +15,10 @@
 - We can find existing images at **Docker Image Registry** ie. registry.hub.docker.com/ 
 
 Command to search a Docker image in the registry:
+
  `docker search <name>`
 
- <name>: image repository name
+ name: image repository name
 
 #### **What is a Docker Container?**
 
@@ -25,13 +26,16 @@ Command to search a Docker image in the registry:
 - with Docker, all containers are started based on a Docker **Image**
 
 Command to run a container based on the docker image
+
  `docker run <options> <image-name>`
 
 Note: by default it runs in the foreground, **-d** ie. daemon makes it run in background
 Example: 
+
 `docker run -d redis:3.2`
 
 Command to list all the running containers, their images and the uptime and also a friendly name and id
+
  `docker ps`
  
 Command that provides more details about a running container:
@@ -39,23 +43,28 @@ Command that provides more details about a running container:
  `docker inspect <friendly-name|container-id>`
 
 Command to display messages that the container writes to std error and std out
+
  `docker logs <friendly-name|container-id>`
 
 If a service needs to be accessible by a process not running in a container, then the port needs to be exposed via the Host.
 ie. ports are bound when containers are started using 
+
  `-p <host-port>:<container-port> option`
  
 Example:
+
  `docker run -d --name redisHostPort -p 6379:6379 redis:latest`
  
 Note: The container Port ad application port needs to be the same, whereas host port can be anything thats free
 
 Command to dynamically allocate a host port
 Example:
+
  `docker run -d --name redisDynamic -p 6379 redis:latest`
 
 Command to know which host port has been assigned when its allocated dynamically 
 Example:
+
 `docker port redisDynamic 6379`
 
 
