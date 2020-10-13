@@ -86,7 +86,8 @@ Example:*
 
 Lets take an example of a nginx docker file
 
-```FROM nginx:alpine   *defines our base image*
+```
+FROM nginx:alpine   *defines our base image*
 COPY . /usr/share/nginx/html  *copies the content of the current directory into a particular location inside the container* 
 ```
 
