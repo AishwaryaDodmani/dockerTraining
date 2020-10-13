@@ -20,12 +20,14 @@ Command to search a Docker image in the registry:
 
  name: image repository name
 
+
 #### **What is a Docker Container?**
 
 - Fundamentally, a container is nothing but a running process, with some added encapsulation features applied to it in order to keep it isolated from the host and from other containers
 - with Docker, all containers are started based on a Docker **Image**
 
-Command to run a container based on the docker image
+
+*Command to run a container based on the docker image*
 
  `docker run <options> <image-name>`
 
@@ -34,7 +36,7 @@ Example:
 
 `docker run -d redis:3.2`
 
-Command to list all the running containers, their images and the uptime and also a friendly name and id
+*Command to list all the running containers, their images and the uptime and also a friendly name and id*
 
  `docker ps`
  
