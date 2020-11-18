@@ -225,7 +225,7 @@ Example:
 
 ### 
 
-### KUBERNETES
+## KUBERNETES
 
 ### **What is Kubernetes?**
 An orchestration tool to manage docker containers
@@ -307,7 +307,7 @@ kubectl get svc
 
 - With our deployment running we can now use kubectl to scale the number of replicas.
 
-- Scaling the deployment will request Kubernetes to launch additional Pods. These Pods will then automatically be load balanced using the exposed Service.
+- **Scaling** the deployment will request Kubernetes to launch additional Pods. These Pods will then automatically be load balanced using the exposed Service.
 
 - The command kubectl scale allows us to adjust the number of Pods running for a particular deployment or replication controller.
     `kubectl scale --replicas=3 deployment http`
