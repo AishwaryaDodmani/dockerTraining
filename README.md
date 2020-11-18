@@ -223,7 +223,7 @@ Example:
   
 
 
-# dockerTraining
+### KUBERNETES
 
 ### **What is Kubernetes?**
 An orchestration tool to manage docker containers
@@ -236,18 +236,22 @@ An orchestration tool to manage docker containers
 - The cluster can be interacted with using the kubectl CLI. 
 - This is the main approach used for managing Kubernetes and the applications running on top of the cluster.
 
-Details of the cluster and its health status can be discovered via 
+- Details of the cluster and its health status can be discovered via 
+
     `kubectl cluster-info`
 
-To view the nodes in the cluster using 
+- To view the nodes in the cluster using 
+
     `kubectl get nodes`
 
 **Note:** If status is Ready, it is ready to accept applications for deployment and the containers can now be deployed.
 
-Command to create and deploy containers onto the cluster
+- Command to create and deploy containers onto the cluster
+
     `kubectl create deployment first-deployment --image=katacoda/docker-http-server`
 
-The status of the deployment can be discovered via the running Pods
+- The status of the deployment can be discovered via the running Pods
+
     `kubectl get pods`
 
 **Note:** Once the container is running it can be exposed via different networking options, depending on requirements. One possible solution is NodePort, that provides a dynamic port to a container.
