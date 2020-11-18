@@ -232,82 +232,82 @@ An orchestration tool to manage docker containers
 - Minikube is a tool that makes it easy to run Kubernetes locally. 
 - Minikube runs a single-node Kubernetes cluster inside a VM on your laptop for users looking to try out Kubernetes or develop with it day-to-day. 
 
-#### ** Kubectl CLI**
+### ** Kubectl CLI**
 - The cluster can be interacted with using the kubectl CLI. 
 - This is the main approach used for managing Kubernetes and the applications running on top of the cluster.
 
 Details of the cluster and its health status can be discovered via 
-`kubectl cluster-info`
+    `kubectl cluster-info`
 
 To view the nodes in the cluster using 
-`kubectl get nodes`
+    `kubectl get nodes`
 
 **Note:** If status is Ready, it is ready to accept applications for deployment and the containers can now be deployed.
 
 Command to create and deploy containers onto the cluster
-`kubectl create deployment first-deployment --image=katacoda/docker-http-server`
+    `kubectl create deployment first-deployment --image=katacoda/docker-http-server`
 
 The status of the deployment can be discovered via the running Pods
-`kubectl get pods`
+    `kubectl get pods`
 
 **Note:** Once the container is running it can be exposed via different networking options, depending on requirements. One possible solution is NodePort, that provides a dynamic port to a container.
 
-`kubectl expose deployment first-deployment --port=80 --type=NodePort`
+    `kubectl expose deployment first-deployment --port=80 --type=NodePort`
 
+**Lets deploy a container onto a cluster**
+- The Kubernetes dashboard allows you to view your applications in a UI.
 
-The Kubernetes dashboard allows you to view your applications in a UI.
+- The run command creates a deployment based on the parameters specified, such as the image or replicas
 
-The run command creates a deployment based on the parameters specified, such as the image or replicas
+- This deployment is issued to the Kubernetes master which launches the Pods and containers required. 
 
-This deployment is issued to the Kubernetes master which launches the Pods and containers required. 
+- Kubectl run_ is similar to docker run but at a cluster level.
 
-Kubectl run_ is similar to docker run but at a cluster level.
+- The format of the command is 
+    `kubectl run <name of deployment> <properties>`
 
-The format of the command is 
-`kubectl run <name of deployment> <properties>`
+- Example:    
+    `kubectl run http --image=katacoda/docker-http-server:latest --replicas=1`
 
-example:
-`kubectl run http --image=katacoda/docker-http-server:latest --replicas=1`
+- You can then use kubectl to view the status of the deployments
+    `kubectl get deployments`
 
-You can then use kubectl to view the status of the deployments
-`kubectl get deployments`
+- To find out what Kubernetes created you can describe the deployment process.
+    `kubectl describe deployment http`
 
-To find out what Kubernetes created you can describe the deployment process.
-`kubectl describe deployment http`
+- The description includes how many replicas are available, labels specified and the events associated with the deployment. These events will highlight any problems and errors that might have occurr
 
-The description includes how many replicas are available, labels specified and the events associated with the deployment. These events will highlight any problems and errors that might have occurr
+- With the deployment created, we can use kubectl to create a service which exposes the Pods on a particular port.
+    `kubectl expose`
 
-With the deployment created, we can use kubectl to create a service which exposes the Pods on a particular port.
-`kubectl expose`
+- command to expose the container port 80 on the host 8000 binding to the external-ip of the host.
+    `kubectl expose deployment http --external-ip="172.17.0.53" --port=8000 --target-port=80`
 
-command to expose the container port 80 on the host 8000 binding to the external-ip of the host.
-`kubectl expose deployment http --external-ip="172.17.0.53" --port=8000 --target-port=80`
+    `curl http://172.17.0.53:8000` and see the response
 
-`curl http://172.17.0.53:8000` and see the response
+- With kubectl run it's possible to create the deployment and expose it as a single command.
 
-With kubectl run it's possible to create the deployment and expose it as a single command.
-
-command to create a second http service exposed on port 8001.
-`kubectl run httpexposed --image=katacoda/docker-http-server:latest --replicas=1 --port=80 --hostport=8001`
-
-You should be able to access it using curl http://172.17.0.53:8001
+- command to create a second http service exposed on port 8001.
+    `kubectl run httpexposed --image=katacoda/docker-http-server:latest --replicas=1 --port=80 --hostport=8001`
+    
+- You should be able to access it using curl http://172.17.0.53:8001
 
 **Note:**
 Under the covers, this exposes the Pod via Docker Port Mapping. As a result, you will not see the service listed using 
 kubectl get svc
 
-To find the details you can use 
-`docker ps | grep httpexposed`
+- To find the details you can use 
+    `docker ps | grep httpexposed`
 
-With our deployment running we can now use kubectl to scale the number of replicas.
+- With our deployment running we can now use kubectl to scale the number of replicas.
 
-Scaling the deployment will request Kubernetes to launch additional Pods. These Pods will then automatically be load balanced using the exposed Service.
+- Scaling the deployment will request Kubernetes to launch additional Pods. These Pods will then automatically be load balanced using the exposed Service.
 
-The command kubectl scale allows us to adjust the number of Pods running for a particular deployment or replication controller.
-`kubectl scale --replicas=3 deployment http`
+- The command kubectl scale allows us to adjust the number of Pods running for a particular deployment or replication controller.
+    `kubectl scale --replicas=3 deployment http`
 
-Once each Pod starts it will be added to the load balancer service. By describing the service you can view the endpoint and the associated Pods which are included.
-`kubectl describe svc http`
+- Once each Pod starts it will be added to the load balancer service. By describing the service you can view the endpoint and the associated Pods which are included.
+    `kubectl describe svc http`
 
 
 **Deployment.yaml**
@@ -333,15 +333,15 @@ spec:
         - containerPort: 80
   ```
 
-This is deployed to the cluster with the command 
-`kubectl create -f deployment.yaml`
+- This is deployed to the cluster with the command 
+    `kubectl create -f deployment.yaml`
 
-`kubectl describe deployment webapp1`
+    `kubectl describe deployment webapp1`
 
 
-Kubernetes has powerful networking capabilities that control how applications communicate. These networking configurations can also be controlled via YAML.
+- Kubernetes has powerful networking capabilities that control how applications communicate. These networking configurations can also be controlled via YAML.
 
-The Service selects all applications with the label webapp1. As multiple replicas, or instances, are deployed, they will be automatically load balanced based on this common label. The Service makes the application available via a NodePort.
+- The Service selects all applications with the label webapp1. As multiple replicas, or instances, are deployed, they will be automatically load balanced based on this common label. The Service makes the application available via a NodePort.
 
 **service.yaml**
 
@@ -361,6 +361,6 @@ spec:
     app: webapp1
 ```
 
-Deploy the Service with 
-`kubectl create -f service.yaml`
+- Deploy the Service with 
+    `kubectl create -f service.yaml`
 
